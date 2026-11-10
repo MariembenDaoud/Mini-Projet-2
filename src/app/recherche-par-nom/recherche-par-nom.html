@@ -1,0 +1,49 @@
+<div class="container">
+  <form class="form-inline">
+    <div class="form-group mx-sm-3 mb-2 mt-2">
+      <label>Nom de l'animal en tapant</label>
+
+      <input
+        #nom
+        [(ngModel)]="searchTerm"
+        name="searchTerm"
+        class="form-control"
+        placeholder="Tapez le nom de l'animal..."
+      />
+    </div>
+  </form>
+
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Espèce</th>
+            <th>Âge</th>
+            <th>Date de naissance</th>
+            <th>Groupe</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (animal of animaux | searchFilter: searchTerm; track animal.idAnimal) {
+            <tr>
+              <td>{{ animal.idAnimal }}</td>
+              <td>{{ animal.nomAnimal }}</td>
+              <td>{{ animal.espece }}</td>
+              <td>{{ animal.age }}</td>
+              <td>{{ animal.dateNaissance | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ animal.groupeAnimal?.nomGroupe ?? 'Sans groupe' }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6">Aucun animal trouvé.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

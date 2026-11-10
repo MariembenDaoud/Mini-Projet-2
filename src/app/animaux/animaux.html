@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <h3>Liste des animaux</h3>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Espèce</th>
+            <th>Âge</th>
+            <th>Date de naissance</th>
+            <th>Groupe</th>
+            @if (authService.isAdmin()) { <th>Actions</th> }
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (animal of animaux; track animal.idAnimal) {
+            <tr>
+              <td>{{ animal.idAnimal }}</td>
+              <td>{{ animal.nomAnimal }}</td>
+              <td>{{ animal.espece }}</td>
+              <td>{{ animal.age }}</td>
+              <td>{{ animal.dateNaissance | date: 'dd/MM/yyyy' }}</td>
+              <td>{{ animal.groupeAnimal?.nomGroupe }}</td>
+
+              @if (authService.isAdmin()) { <td>
+                <button class="btn btn-danger" (click)="supprimerAnimal(animal)">Supprimer</button>
+
+                <a class="btn btn-warning ms-2" [routerLink]="['/updateAnimal', animal.idAnimal]">
+                  Modifier
+                </a>
+              </td> }
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7" class="text-center">Aucun animal trouvé.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+
+      @if (authService.isAdmin()) {
+        <a routerLink="/add-animal" class="btn btn-success">Ajouter un animal</a>
+      }
+    </div>
+  </div>
+</div>

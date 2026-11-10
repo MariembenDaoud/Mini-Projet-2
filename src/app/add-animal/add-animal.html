@@ -1,0 +1,55 @@
+<div class="container">
+  <h2>Ajouter un Animal :</h2>
+
+  <form>
+    <div class="form-group">
+      <label>ID Animal</label>
+      <input type="number" name="idAnimal" class="form-control" [(ngModel)]="newAnimal.idAnimal" />
+    </div>
+
+    <div class="form-group">
+      <label>Nom Animal</label>
+      <input type="text" name="nomAnimal" class="form-control" [(ngModel)]="newAnimal.nomAnimal" />
+    </div>
+
+    <div class="form-group">
+      <label>Espèce</label>
+      <input type="text" name="espece" class="form-control" [(ngModel)]="newAnimal.espece" />
+    </div>
+
+    <div class="form-group">
+      <label>Âge</label>
+      <input type="number" name="age" class="form-control" [(ngModel)]="newAnimal.age" />
+    </div>
+
+    <div class="form-group">
+      <label>Date de naissance</label>
+      <input
+        type="date"
+        name="dateNaissance"
+        class="form-control"
+        [(ngModel)]="newAnimal.dateNaissance"
+      />
+    </div>
+
+    <div class="form-group mb-3">
+      <label>Groupe Animal</label>
+
+      <select
+        class="form-control form-control-lg"
+        id="idGroupe"
+        name="idGroupe"
+        [(ngModel)]="newIdGroupe"
+        required
+      >
+        @for (groupe of groupes; track groupe.idGroupe) {
+          <option [ngValue]="groupe.idGroupe">
+            {{ groupe.nomGroupe }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <button type="button" class="btn btn-primary mt-3" (click)="addAnimal()">Ajouter</button>
+  </form>
+</div>

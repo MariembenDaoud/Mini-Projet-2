@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <h3>Gestion des groupes</h3>
+
+      <div class="col-sm-6 col-md-5 col-lg-4 mb-4">
+        <app-update-groupe-form
+          [groupe]="groupeSelectionne"
+          [ajout]="ajout"
+          (groupeUpdated)="groupeUpdated($event)"
+        />
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr><th>Id</th><th>Nom groupe</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+          @for (groupe of groupes; track groupe.idGroupe) {
+            <tr>
+              <td>{{ groupe.idGroupe }}</td>
+              <td>{{ groupe.nomGroupe }}</td>
+              <td><button type="button" class="btn btn-success" (click)="updateGroupe(groupe)">Editer</button></td>
+            </tr>
+          } @empty {
+            <tr><td colspan="3" class="text-center">Aucune groupe trouvée.</td></tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
